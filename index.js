@@ -39,7 +39,6 @@ if (route == '/about')
         //     response.end("<h1>Ah, we could not find this page \n</h1>")
         // }
 
-
     
     fs.readFile(path.join('static', route), onread)    
 
