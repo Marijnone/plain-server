@@ -34,10 +34,14 @@ if (route == '/about') {
       response.setHeader('Content-type', 'text/html')
         if (err){
             response.statusCode = 404
-            response.end('Not found.\n')
+            response.end('404 page is not found. :() \n')
         } else{
+            var extension = path.extname(route)
+            var type = mime [extension] || 'text/plain'
             response.statusCode = 200
+            response.setHeader('Content-Type',type)
             response.end(buf)
+
         }
     }   
 
