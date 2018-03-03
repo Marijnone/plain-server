@@ -4,13 +4,10 @@ const fs = require('fs')
 
 const mime = {
 '.html': 'text/html',
-'.css': 'text/css'
+'.css': 'text/css',
+'.png': 'image/png'
 }
 
-const routes = {
-    '/about': 'This is a static server running on node.js with no package used 👌',
-    '/': 'Hello World \n'
-}
 
 http.createServer(onRequest).listen(8000)
 
@@ -23,23 +20,14 @@ if (route === '/') {
     route = 'index.html'
 }
 
-if (route == '/about')
+if (route == '/about') {
     route = 'about.html'
-       
 
-        // if (request.url in routes) {
-        //     response.setHeader('Content-Type', 'text/html')
-        //     response.end("<h1>This is the About page</h1>")
-        //     response.statusCode = 200
-        // }
-
-        // else {
-        //     response.statusCode = 404 
-        //     response.setHeader('Content-Type', 'text/html')
-        //     response.end("<h1>Ah, we could not find this page \n</h1>")
-        // }
-
-    
+} if (route == '/images/avatar.png'){
+        route = 'images.html'
+        response.setHeader('Content-type', 'image/png')
+}
+ 
     fs.readFile(path.join('static', route), onread)    
 
     function onread (err,buf) {
@@ -51,6 +39,6 @@ if (route == '/about')
             response.statusCode = 200
             response.end(buf)
         }
-    }
+    }   
 
 }
