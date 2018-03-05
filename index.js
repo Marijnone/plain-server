@@ -1,20 +1,20 @@
 const http =require('http')
 const path = require('path')
 const fs = require('fs')
-
 const mime = {
 '.html': 'text/html',
 '.css': 'text/css',
 '.png': 'image/png'
 }
 
-
 http.createServer(onRequest).listen(8000)
+
+console.log('Server Running on http://127.0.0.1:8000 ');
 
 
 function onRequest(request, response){
         var route = request.url
-        console.log("Hellooo")
+        console.log("There was a request")
     
 if (route === '/') {
     route = 'index.html'
@@ -23,10 +23,15 @@ if (route === '/') {
 if (route == '/about') {
     route = 'about.html'
 
-} if (route == '/images/avatar.png'){
-        route = 'images.html'
-        response.setHeader('Content-type', 'image/png')
+// } if (route == '/images/avatar.png'){
+//         route = '/static/images/images.html'
+//         response.setHeader('Content-type', 'image/png')
 }
+if (route == '/images')
+        route = '../static/images/images.html'
+
+     
+
  
     fs.readFile(path.join('static', route), onread)    
 
@@ -34,7 +39,7 @@ if (route == '/about') {
       response.setHeader('Content-type', 'text/html')
         if (err){
             response.statusCode = 404
-            response.end('404 page is not found. :() \n')
+            response.end('404 page is not found. :( \n')
         } else{
             var extension = path.extname(route)
             var type = mime [extension] || 'text/plain'
