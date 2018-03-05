@@ -1,6 +1,8 @@
 const http =require('http')
 const path = require('path')
 const fs = require('fs')
+const dir = require('node-dir') 
+const static = ('./static/images')
 const mime = {
 '.html': 'text/html',
 '.css': 'text/css',
@@ -15,7 +17,8 @@ console.log('Server Running on http://127.0.0.1:8000 ');
 function onRequest(request, response){
         var route = request.url
         console.log("There was a request")
-    
+        
+         
 if (route === '/') {
     route = 'index.html'
 }
@@ -23,15 +26,18 @@ if (route === '/') {
 if (route == '/about') {
     route = 'about.html'
 
-// } if (route == '/images/avatar.png'){
-//         route = '/static/images/images.html'
-//         response.setHeader('Content-type', 'image/png')
+} if (route == '/images/avatar.png'){
+        route = '/static/images/images.html'
+        response.setHeader('Content-type', 'image/png')
 }
-if (route == '/images')
-        route = '../static/images/images.html'
-
-     
-
+if (route == '/images/index.html')
+    dir.files(__static, function(err,files){
+        if (err) throw err;
+        console.log(files);
+        
+    })
+    
+   
  
     fs.readFile(path.join('static', route), onread)    
 
