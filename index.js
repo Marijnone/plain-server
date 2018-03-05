@@ -26,17 +26,16 @@ if (route === '/') {
 if (route == '/about') {
     route = 'about.html'
 
-} if (route == '/images/avatar.png'){
+} if (route == '/images'){
         route = '/static/images/images.html'
-        response.setHeader('Content-type', 'image/png')
 }
-if (route == '/images/index.html')
-    dir.files(__static, function(err,files){
-        if (err) throw err;
-        console.log(files);
+// if (route == '/images/index.html')
+//     dir.Readfiles(__static, function(err,files){
+//         if (err) throw err;
+//         console.log(files);
         
-    })
-    
+//     })
+    //still debugging the code 🦆
    
  
     fs.readFile(path.join('static', route), onread)    
